@@ -36,7 +36,6 @@ nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
 
-
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
 set list listchars=tab:\▸\-
@@ -46,7 +45,10 @@ set expandtab
 set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
-
+" タブが押された場合にtabstopでなく、shiftwidthの数だけインデントする
+set smarttab
+" 自動インデント
+set autoindent
 
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
@@ -59,16 +61,21 @@ set incsearch
 set wrapscan
 " 検索語をハイライト表示
 set hlsearch
+" 空白文字の表示
+set list
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
+inoremap <silent> jj <ESC>
 
-inoremap <silent> jj <ESC> 
+filetype plugin on
+filetype indent on
 
 " dein.vim {{{
 "  directory configuration
 let s:config_home = empty($XDG_CONFIG_HOME) ? expand('~/.config') : $XDG_CONFIG_HOME
 let s:dein_config_dir = s:config_home . '/nvim/dein'
 let s:toml_file = s:dein_config_dir . '/toml/dein.toml'
+let s:lazy_file = s:dein_config_dir . '/toml/dein_lazy.toml'
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let s:dein_dir = s:cache_home . '/dein'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -81,6 +88,7 @@ let &runtimepath = s:dein_repo_dir . "," . &runtimepath
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
   call dein#load_toml(s:toml_file, {'lazy': 0})
+  call dein#load_toml(s:lazy_file, {'lazy': 1})
   call dein#end()
   call dein#save_state()
 endif
@@ -89,3 +97,10 @@ if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
 " dein.vim }}}
+" マウスの有効化
+set mouse=a
+nnoremap <silent><C-j> :bprev<CR>
+nnoremap <silent><C-k> :bnext<CR>
+
+" ファイルタイプ
+autocmd BufNewFile,BufRead *.{html,htm} set filetype=html

@@ -380,3 +380,11 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 export PATH=$HOME/bin:$PATH
+
+fvim() {
+  files=$(git ls-files) &&
+  selected_files=$(echo "$files" | fzf -m --preview 'head -100 {}') &&
+  vim $selected_files
+}
+
+function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }

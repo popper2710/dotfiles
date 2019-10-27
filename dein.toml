@@ -1,0 +1,224 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# hook_add = '''
+# let g:deoplete#enable_at_startup   = 1
+# '''
+
+[[plugins]]
+repo = 'tomasr/molokai'
+hook_add = '''
+set t_Co=256
+syntax enable
+syntax on
+colorscheme molokai
+" 背景を透明にする
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+map <C-e> :NERDTreeToggle<CR>
+'''
+# gccでコメントアウト
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+# 空白の可視化
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+# .コマンドの強化
+[[plugins]]
+repo = 'tpope/vim-repeat'
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+hook_add = '''
+nnoremap <C-f> :FZFFileList<CR>
+nnoremap <C-g> :Rg<CR>
+nnoremap <C-h> :History<CR>
+nnoremap <Leader><Leader> :Commands<CR>
+command! FZFFileList call fzf#run(fzf#wrap({
+            \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+            \ 'down': '40%'}))
+" ripgrepで検索中、?を押すとプレビュー:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+'''
+
+# インデント可視化
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'sheerun/vim-polyglot'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'readonly', 'filename', 'modified' ],
+    \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ],
+    \ },
+    \ }
+'''
+
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+depends = ['lightline.vim', 'ale']
+hook_add = '''
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+    let b:ale_linters = {
+    \   'javascript': ['eslint', 'eslint-plugin-vue'],
+    \   'python': ['pyflakes', 'pep8'],
+    \   'ruby': ['rubocop'],
+    \   'tex': ['textlint'],
+    \   'markdown': ['textlint'],
+    \   'css': ['stylelint'],
+    \}
+    let g:ale_statusline_format = ['E%d', 'W%d', 'ok']
+    let g:ale_set_loclist = 0
+    let g:ale_set_quickfix = 1
+    nmap <silent> <C-n> <Plug>(ale_next_wrap)
+'''
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+hook_add = '''
+let g:UltiSnipsExpandTrigger='<c-j>'
+'''
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+branch = 'release'
+hook_add = '''
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+'''
+
+[[plugins]]
+repo = 'osyo-manga/vim-over'
+hook_add ='''
+cnoreabb <silent><expr>s getcmdtype()==':' && getcmdline()=~'^s' ? 'OverCommandLine<CR><C-u>%s/<C-r>=get([], getchar(0), '')<CR>' : 's'
+'''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-s2)
+xmap s <Plug>(easymotion-s2)
+omap z <Plug>(easymotion-s2)
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_keys = 'QZASDFGHJKL;'
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+hi EasyMotionTarget guifg=#80a0ff ctermfg=81
+'''
+
+# j, k移動高速化
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+hook_add = '''
+" for accelerated-jk
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+
+[[plugins]]
+repo = 'pseewald/vim-anyfold'
+hook_add = '''
+autocmd Filetype * AnyFoldActivate               " activate for all filetypes
+" or
+autocmd Filetype <your-filetype> AnyFoldActivate " activate for a specific filetype
+
+set foldlevel=0  " close all folds
+" or
+set foldlevel=99 " Open all folds
+'''
+[[plugins]]
+repo = 'junegunn/goyo.vim'
