@@ -338,7 +338,7 @@ zplug "mollifier/anyframe"
 zplug "b4b4r07/enhancd", use:init.sh
 
 # git のローカルリポジトリを一括管理（fzf でリポジトリへジャンプ）
-zplug "motemen/ghq", as:command, from:gh-r
+# zplug "motemen/ghq", as:command, from:gh-r
 # インストールしていないプラグインをインストール
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "

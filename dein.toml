@@ -5,12 +5,6 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
-# [[plugins]]
-# repo = 'Shougo/deoplete.nvim'
-# hook_add = '''
-# let g:deoplete#enable_at_startup   = 1
-# '''
-
 [[plugins]]
 repo = 'tomasr/molokai'
 hook_add = '''
@@ -222,3 +216,12 @@ set foldlevel=99 " Open all folds
 '''
 [[plugins]]
 repo = 'junegunn/goyo.vim'
+
+[[plugins]]
+repo = 'kassio/neoterm'
+hook_add = '''
+let g:neoterm_default_mod='belowright'
+let g:neoterm_size=10
+let g:neoterm_autoscroll=1
+tnoremap <silent> <C-w> <C-\><C-n><C-w>
+'''
