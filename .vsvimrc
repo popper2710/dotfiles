@@ -127,3 +127,4 @@ endif
 
 filetype plugin indent on
 syntax enable
+source $VIMRUNTIME/macros/matchit.vim

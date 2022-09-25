@@ -1,0 +1,56 @@
+2022-09-24T14:47:32.435Z MainController: Spawning nvim, path: C:\Program Files\Neovim\bin\nvim.exe, useWsl: false, args: ["-N","--embed","-c","source c:\\\\Users\\\\Raske\\\\.vscode\\\\extensions\\\\asvetliakov.vscode-neovim-0.0.89/vim/vscode-options.vim","--cmd","source c:\\\\Users\\\\Raske\\\\.vscode\\\\extensions\\\\asvetliakov.vscode-neovim-0.0.89/vim/vscode-neovim.vim","-c","cd c:\\Users\\Raske\\Workplaces\\りあクト","-u","C:\\Users\\Raske\\OneDrive\\For_study\\dotfiles\\.vsvimrc"]
+2022-09-24T14:47:32.440Z MainController: Attaching to neovim
+2022-09-24T14:47:32.443Z MainController: Init
+2022-09-24T14:47:32.443Z MainController: Attaching to neovim notifications
+2022-09-24T14:47:32.624Z TypingManager: Enabling type handler
+2022-09-24T14:47:32.625Z MainController: UIAttach
+2022-09-24T14:47:32.630Z BufferManager: force resyncing layout
+2022-09-24T14:47:32.630Z BufferManager: syncing layout
+2022-09-24T14:47:32.630Z BufferManager: new/changed editors/windows
+2022-09-24T14:47:32.630Z BufferManager: Visible editor, viewColumn: undefined, doc: output:tasks
+2022-09-24T14:47:32.630Z BufferManager: Document not known, init in neovim
+2022-09-24T14:47:32.670Z BufferManager: onDidChangeVisibleTextEditors
+2022-09-24T14:47:32.729Z ViewportManager: No existing view for gridId: 2, initializing a new one...
+2022-09-24T14:47:32.729Z CursorManager: Received cursor update from neovim, gridId: 1
+2022-09-24T14:47:32.730Z CursorManager: No editor for gridId: 1
+2022-09-24T14:47:32.736Z BufferManager: Attaching new external buffer: , id: 1
+2022-09-24T14:47:32.736Z BufferManager: 1 is the first neovim buffer, skipping
+2022-09-24T14:47:32.736Z BufferManager: Init buffer for 2, doc: output:tasks
+2022-09-24T14:47:32.789Z ModeManager: Changing mode to normal
+2022-09-24T14:47:32.794Z ViewportManager: Unable to update scrolled view. No gird for winId: 1000
+2022-09-24T14:47:32.795Z CursorManager: Received cursor update from neovim, gridId: 2
+2022-09-24T14:47:32.795Z CursorManager: No editor for gridId: 2
+2022-09-24T14:47:32.796Z DocumentChangeManager: Init buffer content for bufId: 2, uri: output:tasks
+2022-09-24T14:47:32.797Z BufferManager: Document: output:tasks, BufId: 2
+2022-09-24T14:47:32.797Z BufferManager: Creating new neovim window for undefined column (undefined is OK here)
+2022-09-24T14:47:32.805Z ViewportManager: No existing view for gridId: 5, initializing a new one...
+2022-09-24T14:47:32.805Z BufferManager: Created new window: 1002
+2022-09-24T14:47:32.805Z BufferManager: ViewColumn: undefined - WinId: 1002
+2022-09-24T14:47:32.805Z BufferManager: Setting buffer: 2 to win: 1002, cursor: [1, 0]
+2022-09-24T14:47:32.806Z BufferManager: Closing non visible editors
+2022-09-24T14:47:32.807Z BufferManager: Cancellation requested in syncLayout, returning
+2022-09-24T14:47:32.807Z BufferManager: syncing active editor
+2022-09-24T14:47:32.807Z BufferManager: Waiting for completing layout resyncing
+2022-09-24T14:47:32.881Z BufferManager: syncing layout
+2022-09-24T14:47:32.881Z BufferManager: new/changed editors/windows
+2022-09-24T14:47:32.881Z BufferManager: Closing non visible editors
+2022-09-24T14:47:32.881Z BufferManager: Document output:tasks is not visible and closed, unloading buffer id: 2
+2022-09-24T14:47:32.881Z BufferManager: Editor viewColumn: undefined, winId: 1002, closing
+2022-09-24T14:47:32.884Z BufferManager: Waiting done
+2022-09-24T14:47:33.290Z BufferManager: onDidChangeVisibleTextEditors
+2022-09-24T14:47:33.290Z MainController: Init completed
+2022-09-24T14:47:33.351Z BufferManager: Received onDidChangeEditorOptions
+2022-09-24T14:47:33.351Z BufferManager: No buffer for onDidChangeEditorOptions, skipping
+2022-09-24T14:47:33.751Z BufferManager: syncing layout
+2022-09-24T14:47:33.751Z BufferManager: new/changed editors/windows
+2022-09-24T14:47:33.751Z BufferManager: Visible editor, viewColumn: undefined, doc: output:extension-output-asvetliakov.vscode-neovim-%231-vscode-neovim
+2022-09-24T14:47:33.751Z BufferManager: Document not known, init in neovim
+2022-09-24T14:47:33.752Z BufferManager: Init buffer for 3, doc: output:extension-output-asvetliakov.vscode-neovim-%231-vscode-neovim
+2022-09-24T14:47:33.757Z DocumentChangeManager: Init buffer content for bufId: 3, uri: output:extension-output-asvetliakov.vscode-neovim-%231-vscode-neovim
+2022-09-24T14:47:33.757Z BufferManager: Document: output:extension-output-asvetliakov.vscode-neovim-%231-vscode-neovim, BufId: 3
+2022-09-24T14:47:33.757Z BufferManager: Creating new neovim window for undefined column (undefined is OK here)
+2022-09-24T14:47:33.824Z ViewportManager: No existing view for gridId: 6, initializing a new one...
+2022-09-24T14:47:33.826Z BufferManager: Created new window: 1003
+2022-09-24T14:47:33.826Z BufferManager: ViewColumn: undefined - WinId: 1003
+2022-09-24T14:47:33.826Z BufferManager: Setting buffer: 3 to win: 1003, cursor: [1, 0]
+2022-09-24T14:47:33.826Z BufferManager: Closing non visible editors
