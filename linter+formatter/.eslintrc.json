@@ -1,0 +1,139 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "jest/globals": true
+  },
+  "extends": [
+    "eslint:recommended", // eslintの推奨設定
+    "plugin:@typescript-eslint/recommended", // ESLint Plugin Typescriptの推奨設定
+    "plugin:@typescript-eslint/recommended-requiring-type-checking", // 型チェックルール (重め)
+    "plugin:jsx-a11y/recommended", //webアクセシビリティに配慮したルール
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended", // react hooks用
+    "plugin:jest/recommended",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "react/prop-types": "off" // コンポーネントのpropTypesプロパティを必須にするルール
+      }
+    }
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "tsconfigRootDir": "./",
+    "project": ["./tsconfig.json"],
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "jsx-a11y", "react", "react-hooks", "jest"],
+  "rules": {
+    "padding-line-between-statements": [
+      // 任意の構文の前に空行を入れるルール
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return" // return文の前
+      }
+    ],
+    // オブジェクトの型定義にインターフェースまたは型エイリアスを強制するルール
+    "@typescript-eslint/consistent-type-definitions": "off",
+    // 関数の戻り値に必ず型定義を書かなければいけないルール
+    "@typescript-eslint/explicit-function-return-type": "off",
+    // 上のルールをエクスポートされる関数のみにするルール
+    "@typescript-eslint/explicit-module-boundary-types": ["error"],
+    // Promiseの誤用を防ぐルール
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
+    // 使用していない変数の定義を許さないルール
+    // 変数・引数の先頭が_の場合のみ許容する
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    // Boolean値が期待される表現でBoolean型以外の使用を許さないルール
+    "@typescript-eslint/strict-boolean-expressions": [
+      "error",
+      {
+        "allowNullableObject": true
+      }
+    ],
+    // トリプルスラッシュ・ディレクティブの使用を許可するかどうかのルール
+    // type属性の場合のみ許可
+    "@typescript-eslint/triple-slash-reference": [
+      "error",
+      {
+        "types": "always"
+      }
+    ],
+    // importの際に拡張子を記述するかを定義するルール
+    // js,jsx,ts,tsxのみ省略可
+    "import/extensions": [
+      "error",
+      {
+        "ignorePackages": true,
+        "pattern": {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      }
+    ],
+    // importの順番を定義するルール
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "object",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "{react,react-dom/**}",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "{[A-Z]*,**/[A-Z]*}",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "./**.module.css",
+            "group": "index",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
+    // デバックメッセージでコンポーネントを明示するために使用
+    "react/display-name": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Reactバージョンの自動判定
+    }
+  }
+}
