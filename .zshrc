@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #
 # Executes commands at the start of an interactive session.
 #
@@ -309,6 +316,7 @@ fi
 
 # zplugを有効化する
 source ~/.zplug/init.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # プラグインList
 # zplug "ユーザー名/リポジトリ名", タグ
@@ -324,17 +332,16 @@ zplug "plugins/git",   from:oh-my-zsh
 zplug "peterhurford/git-aliases.zsh"
 # 非同期処理
 zplug "mafredri/zsh-async"
-# 本体（連携前提のパーツ）
-zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
 
-# fzf でよく使う関数の詰め合わせ
-zplug "mollifier/anyframe"
+# zsh カスタムテーマ
+if [[ ! -d ~/.fonts ]];then
+  mkdir ~/.fonts
+  wget -P ~/.fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+fi
 
-# ディレクトリ移動を高速化（fzf であいまい検索）
-zplug "b4b4r07/enhancd", use:init.sh
+# フォントをMesloLGS NFに設定する
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme, from:github, as:theme
 
-# git のローカルリポジトリを一括管理（fzf でリポジトリへジャンプ）
-# zplug "motemen/ghq", as:command, from:gh-r
 # インストールしていないプラグインをインストール
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "
@@ -356,6 +363,15 @@ case "${OSTYPE}" in
   ;;
 esac
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+eval "$(pyenv init -)"
+fi
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -372,4 +388,5 @@ fvim() {
 
 function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
