@@ -32,8 +32,7 @@ set display=lastline
 set listchars=tab:^\ ,trail:~
 
 " ヤンクでクリップボードにコピー
-set clipboard+=unnamed
-
+set clipboard+=unnamedplus
 " 対応する括弧を強調表示
 set showmatch
 
@@ -109,9 +108,13 @@ filetype indent on
 if &compatible
   set nocompatible
 endif
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
+" automatic installation of dein.vim
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if !isdirectory(s:dein_repo_dir)
+  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+endif
+execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 let s:toml_file = '~/dotfiles/vs_dein.toml'
 
 if dein#load_state('~/.cache/dein')
