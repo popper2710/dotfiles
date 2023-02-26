@@ -325,7 +325,6 @@ zplug "peterhurford/git-aliases.zsh"
 # 非同期処理
 zplug "mafredri/zsh-async"
 # 本体（連携前提のパーツ）
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
 zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
 
 # fzf でよく使う関数の詰め合わせ
@@ -357,17 +356,6 @@ case "${OSTYPE}" in
   ;;
 esac
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-eval "$(pyenv init -)"
-fi
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -376,8 +364,6 @@ fi
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export PATH=$HOME/bin:$PATH
-
 fvim() {
   files=$(git ls-files) &&
   selected_files=$(echo "$files" | fzf -m --preview 'head -100 {}') &&
@@ -385,3 +371,5 @@ fvim() {
 }
 
 function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
