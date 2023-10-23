@@ -381,3 +381,18 @@ function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# install asdf
+ASDF_DIR="$HOME/.asdf"
+GITHUB_REPO="https://github.com/asdf-vm/asdf.git"
+
+if [ ! -d "$ASDF_DIR" ]; then
+  git clone "$GITHUB_REPO" "$ASDF_DIR" --branch v0.13.1
+fi
+
+. "$HOME/.asdf/asdf.sh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
