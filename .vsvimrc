@@ -105,16 +105,21 @@ set autoindent
 filetype plugin on
 filetype indent on
 
-if &compatible
-  set nocompatible
+let $CACHE = expand('~/.cache')
+if !($CACHE->isdirectory())
+  call mkdir($CACHE, 'p')
 endif
-" automatic installation of dein.vim
-let s:dein_dir = expand('~/.cache/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-if !isdirectory(s:dein_repo_dir)
-  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+if &runtimepath !~# '/dein.vim'
+  let s:dir = 'dein.vim'->fnamemodify(':p')
+  if !(s:dir->isdirectory())
+    let s:dir = $CACHE .. '/dein/repos/github.com/Shougo/dein.vim'
+    if !(s:dir->isdirectory())
+      execute '!git clone https://github.com/Shougo/dein.vim' s:dir
+    endif
+  endif
+  execute 'set runtimepath^='
+        \ .. s:dir->fnamemodify(':p')->substitute('[/\\]$', '', '')
 endif
-execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 let s:toml_file = '~/dotfiles/vs_dein.toml'
 
 if dein#load_state('~/.cache/dein')
@@ -128,6 +133,5 @@ if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
 
-filetype plugin indent on
 syntax enable
 source $VIMRUNTIME/macros/matchit.vim
