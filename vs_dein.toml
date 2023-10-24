@@ -51,3 +51,85 @@ repo = 'osyo-manga/vim-over'
 hook_add ='''
 cnoreabb <silent><expr>s getcmdtype()==':' && getcmdline()=~'^s' ? 'OverCommandLine<CR><C-u>%s/<C-r>=get([], getchar(0), '')<CR>' : 's'
 '''
+
+# ctrl-a ctrl-x 強化
+[[plugins]]
+repo = 'monaqa/dial.nvim'
+hook_add ='''
+lua << EOF
+local augend = require("dial.augend")
+require("dial.config").augends:register_group{
+  default = {
+    augend.integer.alias.decimal,
+    augend.integer.alias.decimal_int,
+    augend.integer.alias.hex,
+    augend.integer.alias.octal,
+    augend.integer.alias.binary,
+    augend.constant.alias.bool,
+    augend.semver.alias.semver,
+    augend.date.new {
+        pattern = "%Y/%m/%d",
+        default_kind = "day",
+    },
+    augend.date.new {
+        pattern = "%Y-%m-%d",
+        default_kind = "day",
+    },
+    augend.date.new {
+        pattern = "%m/%d",
+        default_kind = "day",
+        only_valid = true,
+    },
+    augend.date.new {
+        pattern = "%H:%M",
+        default_kind = "day",
+        only_valid = true,
+    },
+    augend.constant.alias.ja_weekday_full,
+  },
+}
+require("dial.config").augends:on_filetype {
+  python = {
+    augend.integer.alias.decimal,
+    augend.integer.alias.decimal_int,
+    augend.integer.alias.hex,
+    augend.integer.alias.octal,
+    augend.integer.alias.binary,
+    augend.constant.alias.bool,
+    augend.semver.alias.semver,
+    augend.date.new {
+        pattern = "%Y/%m/%d",
+        default_kind = "day",
+    },
+    augend.date.new {
+        pattern = "%Y-%m-%d",
+        default_kind = "day",
+    },
+    augend.date.new {
+        pattern = "%m/%d",
+        default_kind = "day",
+        only_valid = true,
+    },
+    augend.date.new {
+        pattern = "%H:%M",
+        default_kind = "day",
+        only_valid = true,
+    },
+    augend.constant.alias.ja_weekday_full,
+    augend.integer.alias.decimal,
+    augend.integer.alias.hex,
+    augend.constant.new { elements = { "True", "False" }, word = true, cyclic = true },
+    augend.constant.new { elements = {"and", "or"}, word = true, cyclic = true },
+  },
+}
+EOF
+nmap  <C-a>  <Plug>(dial-increment)
+nmap  <C-x>  <Plug>(dial-decrement)
+nmap g<C-a> g<Plug>(dial-increment)
+nmap g<C-x> g<Plug>(dial-decrement)
+vmap  <C-a>  <Plug>(dial-increment)
+vmap  <C-x>  <Plug>(dial-decrement)
+vmap g<C-a> g<Plug>(dial-increment)
+vmap g<C-x> g<Plug>(dial-decrement)
+'''
+
