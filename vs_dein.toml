@@ -34,11 +34,16 @@ map <C-l> <Plug>(edgemotion-k)
 '''
 
 [[plugins]]
-repo = 'asvetliakov/vim-easymotion'
+repo = 'phaazon/hop.nvim'
 hook_add = '''
-nmap s <Plug>(easymotion-s2)
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
+lua << EOF
+  require'hop'.setup()
+EOF
+nmap s [hop]
+xmap s [hop]
+nnoremap <silent> [hop]w :HopWord<CR>
+nnoremap <silent> [hop]l :HopLine<CR>
+nnoremap <silent> [hop]f :HopChar1<CR>
 '''
 
 [[plugins]]
