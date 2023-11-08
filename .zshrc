@@ -265,9 +265,23 @@ alias diff='diff -U1'
 alias tma='tmux attach'
 alias tml='tmux list-window'
 
+# docker alias
+alias odc=dc
+alias dc='docker compose'
+alias dcb='docker compose build'
+alias dcr='docker compose run --rm'
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+alias dce='docker compose exec'
+alias dcl='docker compose logs'
+alias dps='docker ps'
+alias di='docker images'
+alias dr='docker rm'
+alias dri='docker rmi'
 alias dki="docker run -i -t -P"
 alias dex="docker exec -i -t"
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+
 
 # -----------------------------
 # Plugin
