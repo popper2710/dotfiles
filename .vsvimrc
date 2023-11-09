@@ -78,9 +78,6 @@ set smarttab
 " 自動インデント
 set autoindent
 
-filetype plugin on
-filetype indent on
-
 let $CACHE = expand('~/.cache')
 if !($CACHE->isdirectory())
   call mkdir($CACHE, 'p')
@@ -98,6 +95,10 @@ if &runtimepath !~# '/dein.vim'
 endif
 let s:toml_file = '~/dotfiles/vs_dein.toml'
 
+filetype plugin on
+filetype indent on
+syntax enable
+
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
   call dein#load_toml(s:toml_file, {'lazy': 0})
@@ -109,5 +110,6 @@ if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
 
-syntax enable
+let g:python3_host_prog='C:\Users\s-ota\.pyenv\pyenv-win\versions\3.11.5\python3.exe'
+
 source $VIMRUNTIME/macros/matchit.vim
